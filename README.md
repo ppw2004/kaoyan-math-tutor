@@ -7,11 +7,18 @@
 ```bash
 # 作为 Claude Code 个人技能安装(全局)
 git clone https://github.com/ppw2004/kaoyan-math-tutor.git ~/.claude/skills/kaoyan-math-tutor
+
+# 可选: 拉取外部真题源(数学一 1987-2025 真题+解析, 本地 sources/ 不入库)
+cd ~/.claude/skills/kaoyan-math-tutor && bash scripts/setup-sources.sh
 ```
 
-安装后在本仓库目录（或含本 skill 的项目）里对 Claude 说「开始学极限」「这道题不会」「看看我的进度」「今天该复习什么」即可。
+安装后在本仓库目录（或含本 skill 的项目）里对 Claude 说「开始学极限」「这道题不会」「看看我的进度」「今天该复习什么」「做两道 2024 真题」即可。
 
 > 学习数据（progress.md / mistakes/）直接写在本仓库内，跟着 git 走，换机器 clone 即同步。
+
+## 版权说明
+
+本仓库全部原创内容（讲义骨架、脚本），MIT 协议。**不收录任何真题或第三方讲义**——真题通过 `setup-sources.sh` 从 [TsekaLuk/Kaoyan-Math1-Papers](https://github.com/TsekaLuk/Kaoyan-Math1-Papers)（CC BY-NC-SA 4.0）拉取到本地 `sources/`（已 gitignore），仅供个人非商业学习。
 
 ## 目录结构
 
@@ -27,7 +34,8 @@ kaoyan-math-tutor/
 ├── progress.md           # 学习进度 + 学习日志
 └── scripts/
     ├── review.py         # 错题间隔复习调度（到期提醒 / 答对升级 / 答错重置）
-    └── quiz.py           # 从知识库题库抽题自测
+    ├── quiz.py           # 知识库/真题抽题自测（--zhenti 2024 --q 1,17 --answer）
+    └── setup-sources.sh  # 稀疏克隆外部真题源到 sources/（仅 .md，~6MB）
 ```
 
 ## 使用
