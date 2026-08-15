@@ -8,7 +8,7 @@
 # 作为 Claude Code 个人技能安装(全局)
 git clone https://github.com/ppw2004/kaoyan-math-tutor.git ~/.claude/skills/kaoyan-math-tutor
 
-# 可选: 拉取外部真题源(数学一 1987-2025 真题+解析, 本地 sources/ 不入库)
+# 可选: 拉取外部数据源(数一真题1987-2025 + GPL讲法参考笔记, 本地 sources/ 不入库, ~7MB)
 cd ~/.claude/skills/kaoyan-math-tutor && bash scripts/setup-sources.sh
 ```
 
@@ -18,7 +18,12 @@ cd ~/.claude/skills/kaoyan-math-tutor && bash scripts/setup-sources.sh
 
 ## 版权说明
 
-本仓库全部原创内容（讲义骨架、脚本），MIT 协议。**不收录任何真题或第三方讲义**——真题通过 `setup-sources.sh` 从 [TsekaLuk/Kaoyan-Math1-Papers](https://github.com/TsekaLuk/Kaoyan-Math1-Papers)（CC BY-NC-SA 4.0）拉取到本地 `sources/`（已 gitignore），仅供个人非商业学习。
+本仓库全部原创内容（讲义骨架、脚本），MIT 协议。**不收录任何真题或第三方讲义**，外部参考均通过 `setup-sources.sh` 拉取到本地 `sources/`（已 gitignore）：
+
+- [TsekaLuk/Kaoyan-Math1-Papers](https://github.com/TsekaLuk/Kaoyan-Math1-Papers)（CC BY-NC-SA 4.0）— 真题练习用
+- [BlandAlpha/obsidian_math](https://github.com/BlandAlpha/obsidian_math)（GPL-3.0）— 讲法参考用，只读不抄，讲义均为自写
+
+考纲动词层级（了解/理解/会/掌握）为对官方《数学考试大纲》的事实性转述，大纲原文版权归考试中心。
 
 ## 目录结构
 
@@ -35,7 +40,7 @@ kaoyan-math-tutor/
 └── scripts/
     ├── review.py         # 错题间隔复习调度（到期提醒 / 答对升级 / 答错重置）
     ├── quiz.py           # 知识库/真题抽题自测（--zhenti 2024 --q 1,17 --answer）
-    └── setup-sources.sh  # 稀疏克隆外部真题源到 sources/（仅 .md，~6MB）
+    └── setup-sources.sh  # 稀疏克隆外部源到 sources/（真题库 + 讲法参考，仅 .md，~7MB）
 ```
 
 ## 使用

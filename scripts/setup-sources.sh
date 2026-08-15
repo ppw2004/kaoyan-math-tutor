@@ -24,16 +24,34 @@ else
     echo "✓ 完成: $DEST"
 fi
 
+# ── 源 2: 考研数学笔记 obsidian_math (GPL-3.0, BlandAlpha) — 讲法参考 ──
+NAME="obsidian_math"
+URL="https://github.com/BlandAlpha/obsidian_math.git"
+DEST="$SOURCES/$NAME"
+
+if [ -d "$DEST/.git" ]; then
+    echo "✓ $NAME 已存在, 更新中..."
+    git -C "$DEST" pull --ff-only 2>/dev/null || echo "  (更新失败, 保留本地版本)"
+else
+    echo "→ 克隆 $NAME (仅 .md)..."
+    git clone --depth 1 --filter=blob:none --sparse "$URL" "$DEST"
+    git -C "$DEST" sparse-checkout set --no-cone '**.md'
+    echo "✓ 完成: $DEST"
+fi
+
 # ── 署名与许可说明 ──
 cat > "$SOURCES/SOURCES.md" <<'EOF'
 # 外部数据源说明（本地目录，不入库）
 
-| 目录 | 内容 | 许可证 | 仓库 |
-|------|------|--------|------|
-| Kaoyan-Math1-Papers/ | 数学一 1987-2025 真题+解析 (Markdown) | CC BY-NC-SA 4.0 | github.com/TsekaLuk/Kaoyan-Math1-Papers |
+| 目录 | 内容 | 许可证 | 用途 | 仓库 |
+|------|------|--------|------|------|
+| Kaoyan-Math1-Papers/ | 数学一 1987-2025 真题+解析 (Markdown) | CC BY-NC-SA 4.0 | 抽真题练习 | github.com/TsekaLuk/Kaoyan-Math1-Papers |
+| obsidian_math/ | 考研数学(数二)知识笔记, 章目录+单概念单文件 | GPL-3.0 | 讲法/易错点参考(只读, 勿复制) | github.com/BlandAlpha/obsidian_math |
 
 以上内容由各自作者持有版权，仅限个人非商业学习使用；
 本仓库不收录、不分发这些内容，仅提供索引与本地拉取工具。
+特别地，obsidian_math 为 GPL-3.0：可阅读参考其讲法与结构，
+但知识库讲义必须用自己的话写，不得复制其文本。
 EOF
 
 echo ""
